@@ -2,14 +2,21 @@ package lesson2;
 
 class FirstProgram {
 
-  static int age = 24;
+  static int age = 25;
 
   public static void main(String[] args) {
-    int i = 1_000_111;
-    printAge();
+    int i = 10;
+    for (int j = 100; j > 0; j--) {
+      System.out.print( j + " is ");
+      System.out.println( isEven(j) ? "even" : "odd" );
+    }
   }
 
-  public static void printAge() {
-    System.out.println("Age: "+age);
+  public static boolean isEven(int i) {
+    return i % 2 == 0;
+  }
+
+  public static void println(String text) {
+    System.out.println(text);
   }
 }
