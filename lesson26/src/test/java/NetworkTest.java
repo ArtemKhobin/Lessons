@@ -86,9 +86,8 @@ public class NetworkTest {
         try (Socket connection = serverSocket.accept()) {
           Server server= new Server(connection);
           boolean active = true;
-          String command = server.parseInputStream();
-          System.out.println(command);
-          while (command != null && active) {
+          String command;
+          while (active && (command = server.parseInputStream()) != null) {
             switch (command) {
               case "date":
                 server.sendResponse(LocalDate.now().toString());
@@ -104,8 +103,8 @@ public class NetworkTest {
                 active = false;
                 break;
             }
-          connection.close();
           }
+          connection.close();
 
         }
       }
@@ -131,6 +130,7 @@ public class NetworkTest {
     public void sendResponse(String response) throws IOException {
       Writer writer = new OutputStreamWriter(connection.getOutputStream());
       writer.write(response);
+      writer.write("\n");
       writer.flush();
     }
 
